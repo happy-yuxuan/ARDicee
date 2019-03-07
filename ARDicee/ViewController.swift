@@ -21,18 +21,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         // 自己创建的模型
-        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)    //通过SCNBox创建一个正方体的形状，这个正方体是个类型，是SCNNode.geometry的属性，到时候可以作用到SCNNode上，这个Node就是正方形的了
+//        let cube = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)    //通过SCNBox创建一个正方体的形状，这个正方体是个类型，是SCNNode.geometry的属性，到时候可以作用到SCNNode上，这个Node就是正方形的了
+        let sphere = SCNSphere(radius: 0.2)
         
         let material = SCNMaterial()
-        material.diffuse.contents = UIColor.red // 物体的材料是红色的
+        // download at https://www.solarsystemscope.com/textures/   MOON
+        material.diffuse.contents = UIImage(named: "art.scnassets/8k_moon.jpg")
         
-        cube.materials = [material] // 这个正方体的材料是 material变量给的
+        sphere.materials = [material] // 材料是 material变量给的
         
         let node = SCNNode()
         
         node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)   // 这个物体的位置， z的位置要留意，-是朝向自己的箭头
         
-        node.geometry = cube    // 这个node几何上表示是什么
+        node.geometry = sphere    // 这个node几何上表示是什么
         
         sceneView.scene.rootNode.addChildNode(node) // 屏幕是一个sceneView中的scene的rootNode中增加一个节点在屏幕上
         
